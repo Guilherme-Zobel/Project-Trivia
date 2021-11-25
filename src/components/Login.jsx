@@ -12,6 +12,7 @@ class Login extends Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.pageSetings = this.pageSetings.bind(this);
   }
 
   handleChange({ target: { name, value } }) {
@@ -32,12 +33,19 @@ class Login extends Component {
     return !(name.length > 0 && email.length > 0);
   } // depois enviar para serviçes
 
+  pageSetings(e) {
+    e.preventDefault();
+    const { history } = this.props;
+    history.push('/settings');
+  }
+
   render() {
     const {
       state: { email, name },
       handleChange,
       handleClick,
       validateStartButton,
+      pageSetings,
     } = this;
 
     return (
@@ -65,6 +73,13 @@ class Login extends Component {
           onClick={ handleClick }
         >
           Jogar
+        </button>
+        <button
+          type="button"
+          onClick={ pageSetings }
+          data-testid="btn-settings"
+        >
+          Settings
         </button>
       </form>
     );
