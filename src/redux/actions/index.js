@@ -1,5 +1,6 @@
 export const USER_EMAIL = 'USER_EMAIL';
 export const USER_TOKEN = 'USER_TOKEN';
+export const USER_NAME = 'USER_NAME';
 
 export function userEmail(payload) {
   return {
@@ -11,6 +12,13 @@ export function userEmail(payload) {
 export function userToken(payload) {
   return {
     type: USER_TOKEN,
+    payload,
+  };
+}
+
+export function userName(payload) {
+  return {
+    type: USER_NAME,
     payload,
   };
 }

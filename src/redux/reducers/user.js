@@ -1,8 +1,9 @@
-import { USER_EMAIL, USER_TOKEN } from '../actions';
+import { USER_EMAIL, USER_TOKEN, USER_NAME } from '../actions';
 
 const INITIAL_STATE = {
   email: '',
   token: '',
+  name: '',
 };
 
 export default function user(state = INITIAL_STATE, action) {
@@ -16,6 +17,11 @@ export default function user(state = INITIAL_STATE, action) {
 
     return {
       ...state, token: action.payload,
+    };
+
+  case USER_NAME:
+    return {
+      ...state, name: action.payload,
     };
 
   default:
