@@ -5,7 +5,6 @@ class TriviaGame extends React.Component {
     super(props);
     this.state = {
       trivia: [],
-      // wrongAsnwer: 0,
     };
 
     this.responseApi = this.responseApi.bind(this);
@@ -32,7 +31,8 @@ class TriviaGame extends React.Component {
   }
 
   makeEstrutureTrivia(trivia, initialIndex) {
-    const misturar = [trivia[initialIndex].correct_answer, ...trivia[initialIndex].incorrect_answers];
+    const mixedArray = [trivia[initialIndex].correct_answer,
+      ...trivia[initialIndex].incorrect_answers];
     return (
       <div id={ initialIndex }>
         <h3 data-testid="question-category">{trivia[initialIndex].category}</h3>
@@ -41,11 +41,11 @@ class TriviaGame extends React.Component {
           {this.convert(trivia[initialIndex].question)}
         </h3>
         <div>
-          {misturar.map((mist, index) => (index === 0 ? (
-            <button type="button" data-testid="correct-answer">{mist}</button>)
+          {mixedArray.map((mix, index) => (index === 0 ? (
+            <button type="button" data-testid="correct-answer">{mix}</button>)
             : (
               <button type="button" data-testid={ `wrong-answer-${index}` }>
-                {mist}
+                {mix}
               </button>)
           ))}
         </div>
@@ -66,25 +66,3 @@ class TriviaGame extends React.Component {
 }
 
 export default TriviaGame;
-
-/* trivia.map(({
-      category, question,
-      correct_answer, incorrect_answers,
-    }, index) => (
-      <div key={ index }>
-        <h3 data-testid="question-category">{category}</h3>
-        <h3 data-testid="question-text">
-          titulo:
-          {this.convert(question)}
-        </h3>
-      </div>
-    )); */
-
-/*     (({
-      category, question,
-      correct_answer, incorrect_answers,
-    }) => */
-
-/*     <button type="button" key={ index }>
-              {mist === mist[0]}
-            </button> */
