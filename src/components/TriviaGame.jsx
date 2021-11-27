@@ -5,7 +5,6 @@ class TriviaGame extends React.Component {
     super(props);
     this.state = {
       trivia: [],
-      // wrongAsnwer: 0,
     };
 
     this.responseApi = this.responseApi.bind(this);
@@ -67,25 +66,3 @@ class TriviaGame extends React.Component {
 }
 
 export default TriviaGame;
-
-/* trivia.map(({
-      category, question,
-      correct_answer, incorrect_answers,
-    }, index) => (
-      <div key={ index }>
-        <h3 data-testid="question-category">{category}</h3>
-        <h3 data-testid="question-text">
-          titulo:
-          {this.convert(question)}
-        </h3>
-      </div>
-    )); */
-
-/*     (({
-      category, question,
-      correct_answer, incorrect_answers,
-    }) => */
-
-/*     <button type="button" key={ index }>
-              {mix === mix[0]}
-            </button> */
