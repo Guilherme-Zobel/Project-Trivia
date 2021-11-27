@@ -32,7 +32,7 @@ class TriviaGame extends React.Component {
   }
 
   makeEstrutureTrivia(trivia, initialIndex) {
-    const misturar = [trivia[initialIndex].correct_answer,
+    const mixedArray = [trivia[initialIndex].correct_answer,
       ...trivia[initialIndex].incorrect_answers];
     return (
       <div id={ initialIndex }>
@@ -42,11 +42,11 @@ class TriviaGame extends React.Component {
           {this.convert(trivia[initialIndex].question)}
         </h3>
         <div>
-          {misturar.map((mist, index) => (index === 0 ? (
-            <button type="button" data-testid="correct-answer">{mist}</button>)
+          {mixedArray.map((mix, index) => (index === 0 ? (
+            <button type="button" data-testid="correct-answer">{mix}</button>)
             : (
               <button type="button" data-testid={ `wrong-answer-${index}` }>
-                {mist}
+                {mix}
               </button>)
           ))}
         </div>
@@ -87,5 +87,5 @@ export default TriviaGame;
     }) => */
 
 /*     <button type="button" key={ index }>
-              {mist === mist[0]}
+              {mix === mix[0]}
             </button> */
