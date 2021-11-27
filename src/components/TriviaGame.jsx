@@ -1,10 +1,12 @@
 import React from 'react';
+import Answer from './Answer';
 
 class TriviaGame extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       trivia: [],
+      click: false,
     };
 
     this.responseApi = this.responseApi.bind(this);
@@ -14,6 +16,12 @@ class TriviaGame extends React.Component {
 
   componentDidMount() {
     this.responseApi();
+  }
+
+  colorAnsers() {
+    this.setState = ({
+      click: true,
+    });
   }
 
   async responseApi() {
@@ -40,15 +48,9 @@ class TriviaGame extends React.Component {
           titulo:
           {this.convert(trivia[initialIndex].question)}
         </h3>
-        <div>
-          {mixedArray.map((mix, index) => (index === 0 ? (
-            <button type="button" data-testid="correct-answer">{mix}</button>)
-            : (
-              <button type="button" data-testid={ `wrong-answer-${index}` }>
-                {mix}
-              </button>)
-          ))}
-        </div>
+        {mixedArray.map((mix, index) => (
+          <Answer mix={ mix } index={ index } key={ `${mix}-${index}` } />
+        ))}
       </div>
     );
   }
