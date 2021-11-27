@@ -32,7 +32,8 @@ class TriviaGame extends React.Component {
   }
 
   makeEstrutureTrivia(trivia, initialIndex) {
-    const misturar = [trivia[initialIndex].correct_answer, ...trivia[initialIndex].incorrect_answers];
+    const misturar = [trivia[initialIndex].correct_answer,
+      ...trivia[initialIndex].incorrect_answers];
     return (
       <div id={ initialIndex }>
         <h3 data-testid="question-category">{trivia[initialIndex].category}</h3>
