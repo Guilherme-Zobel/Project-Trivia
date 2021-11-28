@@ -114,9 +114,3 @@ class TriviaGame extends React.Component {
 }
 
 export default TriviaGame;
-
-// if (target.id === 'correct-answer') {
-//   this.setState((preventState) => ({
-//     score: preventState.score + 1,
-//   }));
-// }
