@@ -1,27 +1,27 @@
 import React from 'react';
 import Answer from './Answer';
+import Timer from './Timer';
 
 class TriviaGame extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       trivia: [],
-      click: false,
+      showTimer: true,
+      countAwnser: 0,
+      correctScore: 0,
+      incorrectScore: 0,
     };
 
     this.responseApi = this.responseApi.bind(this);
     this.makeEstrutureTrivia = this.makeEstrutureTrivia.bind(this);
     this.convert = this.convert.bind(this);
+    this.resultCorrectScore = this.resultCorrectScore.bind(this);
+    this.resultIncorrectScore = this.resultIncorrectScore.bind(this);
   }
 
   componentDidMount() {
     this.responseApi();
-  }
-
-  colorAnsers() {
-    this.setState = ({
-      click: true,
-    });
   }
 
   async responseApi() {
@@ -38,6 +38,23 @@ class TriviaGame extends React.Component {
     return str;
   }
 
+  resultCorrectScore({ target }) {
+    if (target.id === 'correct-answer') {
+      this.setState((preventState) => ({
+        correctScore: preventState.correctScore + 1,
+      }));
+    }
+  }
+
+  resultIncorrectScore({ target }) {
+    console.log(target.name);
+    if (target.name === 'wrong-answer') {
+      this.setState((preventState) => ({
+        incorrectScore: preventState.incorrectScore + 1,
+      }));
+    }
+  }
+
   makeEstrutureTrivia(trivia, initialIndex) {
     const mixedArray = [trivia[initialIndex].correct_answer,
       ...trivia[initialIndex].incorrect_answers];
@@ -49,22 +66,57 @@ class TriviaGame extends React.Component {
           {this.convert(trivia[initialIndex].question)}
         </h3>
         {mixedArray.map((mix, index) => (
-          <Answer mix={ mix } index={ index } key={ `${mix}-${index}` } />
+          <Answer
+            resultCorrectScore={ this.resultCorrectScore }
+            resultIncorrectScore={ this.resultIncorrectScore }
+            mix={ mix }
+            index={ index }
+            key={ `${mix}-${index}` }
+          />
         ))}
+        <hr />
+        <button
+          type="button"
+          onClick={ () => {
+            const { showTimer } = this.state;
+            this.setState((prevState) => ({ countAwnser: prevState.countAwnser + 1 }));
+
+            if (showTimer) {
+              this.setState({ showTimer: false });
+            } else this.setState({ showTimer: true });
+          } }
+        >
+          Próxima pergunta
+        </button>
       </div>
     );
   }
 
   render() {
-    const { trivia } = this.state;
+    const { trivia, showTimer, countAwnser, correctScore, incorrectScore } = this.state;
     return (
       <div>
         <h2>Trivia game</h2>
         {trivia.length === 0 ? (<p>carregando...</p>)
-          : this.makeEstrutureTrivia(trivia, 0)}
+          : this.makeEstrutureTrivia(trivia, countAwnser)}
+        {showTimer && <Timer /> }
+        <h3>
+          {`Correct Score =  
+          ${correctScore}`}
+        </h3>
+        <h3>
+          {`Incorrect Score = 
+          ${incorrectScore}`}
+        </h3>
       </div>
     );
   }
 }
 
 export default TriviaGame;
+
+// if (target.id === 'correct-answer') {
+//   this.setState((preventState) => ({
+//     score: preventState.score + 1,
+//   }));
+// }
