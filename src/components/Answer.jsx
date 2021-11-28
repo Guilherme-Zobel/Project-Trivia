@@ -25,7 +25,6 @@ export default class Answer extends Component {
         <button
           data-testid="correct-answer"
           type="button"
-          disabled={}
           id="correct-answer"
           onClick={ (e) => this.correctOrIncorrect(e) }
         // className={colorAnswer && ('greenAnswer')}
