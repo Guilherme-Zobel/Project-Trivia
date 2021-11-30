@@ -1,16 +1,16 @@
 import React from 'react';
 import Answer from './Answer';
-import Timer from './Timer';
 
 class TriviaGame extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       trivia: [],
-      showTimer: true,
       countAwnser: 0,
       correctScore: 0,
       incorrectScore: 0,
+      count: 30,
+      isDisabled: false,
     };
 
     this.responseApi = this.responseApi.bind(this);
@@ -18,10 +18,44 @@ class TriviaGame extends React.Component {
     this.convert = this.convert.bind(this);
     this.resultCorrectScore = this.resultCorrectScore.bind(this);
     this.resultIncorrectScore = this.resultIncorrectScore.bind(this);
+    this.resetCount = this.resetCount.bind(this);
   }
 
   componentDidMount() {
     this.responseApi();
+    this.startingTime();
+  }
+
+  componentDidUpdate() {
+    const MIN_SECOND = 0;
+    const { count } = this.state;
+    if (count === MIN_SECOND) {
+      return (
+        this.componentWillUnmount(),
+        this.resetCount()
+      );
+    }
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timerInterval);
+  }
+
+  startingTime() {
+    const TIME = 1000;
+    this.timerInterval = setInterval(() => {
+      this.setState((prevState) => ({ count: prevState.count - 1 }));
+    }, TIME);
+  }
+
+  resetCount() {
+    this.setState({
+      count: 'tempo esgotado',
+      isDisabled: true,
+    });
+    this.setState((prevState) => ({
+      incorrectScore: prevState.incorrectScore + 1,
+    }));
   }
 
   async responseApi() {
@@ -56,6 +90,7 @@ class TriviaGame extends React.Component {
   }
 
   makeEstrutureTrivia(trivia, initialIndex) {
+    const { isDisabled } = this.state;
     const mixedArray = [trivia[initialIndex].correct_answer,
       ...trivia[initialIndex].incorrect_answers];
     return (
@@ -71,6 +106,7 @@ class TriviaGame extends React.Component {
             resultIncorrectScore={ this.resultIncorrectScore }
             mix={ mix }
             index={ index }
+            isDisabled={ isDisabled }
             key={ `${mix}-${index}` }
           />
         ))}
@@ -78,12 +114,11 @@ class TriviaGame extends React.Component {
         <button
           type="button"
           onClick={ () => {
-            const { showTimer } = this.state;
-            this.setState((prevState) => ({ countAwnser: prevState.countAwnser + 1 }));
-
-            if (showTimer) {
-              this.setState({ showTimer: false });
-            } else this.setState({ showTimer: true });
+            this.setState((prevState) => ({
+              countAwnser: prevState.countAwnser + 1,
+              count: 30,
+            }));
+            this.componentDidUpdate();
           } }
         >
           Próxima pergunta
@@ -93,13 +128,15 @@ class TriviaGame extends React.Component {
   }
 
   render() {
-    const { trivia, showTimer, countAwnser, correctScore, incorrectScore } = this.state;
+    const { trivia, countAwnser, correctScore, incorrectScore, count } = this.state;
     return (
       <div>
         <h2>Trivia game</h2>
         {trivia.length === 0 ? (<p>carregando...</p>)
           : this.makeEstrutureTrivia(trivia, countAwnser)}
-        {showTimer && <Timer /> }
+        <h3>
+          {`Timer = ${count}`}
+        </h3>
         <h3>
           {`Correct Score =  
           ${correctScore}`}

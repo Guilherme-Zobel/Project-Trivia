@@ -18,7 +18,7 @@ export default class Answer extends Component {
   }
 
   render() {
-    const { mix, index } = this.props;
+    const { mix, index, isDisabled } = this.props;
 
     return (
       index === 0 ? (
@@ -26,6 +26,7 @@ export default class Answer extends Component {
           data-testid="correct-answer"
           type="button"
           id="correct-answer"
+          disabled={ isDisabled }
           onClick={ (e) => this.correctOrIncorrect(e) }
         // className={colorAnswer && ('greenAnswer')}
         >
@@ -37,6 +38,7 @@ export default class Answer extends Component {
               data-testid={ `wrong-answer-${index}` }
               type="button"
               name="wrong-answer"
+              disabled={ isDisabled }
               onClick={ this.correctOrIncorrect }
               className="wrong-answer"
             >
@@ -53,4 +55,5 @@ Answer.propTypes = {
   mix: PropTypes.string.isRequired,
   resultCorrectScore: PropTypes.func.isRequired,
   resultIncorrectScore: PropTypes.func.isRequired,
+  isDisabled: PropTypes.bool.isRequired,
 };

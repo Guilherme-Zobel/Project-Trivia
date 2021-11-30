@@ -1,36 +1,40 @@
-import React, { Component } from 'react';
+// import React, { Component } from 'react';
 
-class Timer extends Component {
-  constructor() {
-    super();
-    this.state = {
-      count: 30,
-    };
-  }
+// class Timer extends Component {
+//   constructor(props) {
+//     super(props);
+//     this.state = {
+//       count: 5,
+//     };
+//     this.resetCount = this.resetCount.bind(this);
+//   }
 
-  componentDidMount() {
-    const TIME = 1000;
-    this.timerInterval = setInterval(() => {
-      this.setState((prevState) => ({ count: prevState.count - 1 }));
-    }, TIME);
-  }
+//   componentDidMount() {
+//     const TIME = 1000;
+//     this.timerInterval = setInterval(() => {
+//       this.setState((prevState) => ({ count: prevState.count - 1 }));
+//     }, TIME);
+//   }
 
-  componentWillUnmount() {
-    clearInterval(this.timerInterval);
-  }
+//   componentDidUpdate() {
+//     const MIN_SECOND = -1;
+//     const { count } = this.state;
+//     if (count === MIN_SECOND) { this.resetCount(); }
+//   }
 
-  render() {
-    const { count } = this.state;
-    return (
-      count === 0 ? (this.setState({ count: 0 })) : (
-        <div>
-          <h3>
-            {`Timer = ${count}`}
-          </h3>
-        </div>)
+//   resetCount() {
+//     this.setState({ count: 30 });
+//   }
 
-    );
-  }
-}
+//   render() {
+//     const { count } = this.state;
+//     return (
+//       <div>
+//         <h3>
+//           {`Timer = ${count}`}
+//         </h3>
+//       </div>);
+//   }
+// }
 
-export default Timer;
+// export default Timer;
