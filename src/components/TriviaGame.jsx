@@ -1,5 +1,8 @@
+import PropTypes from 'prop-types';
 import React from 'react';
+import { connect } from 'react-redux';
 import Answer from './Answer';
+import { triviaApi } from '../redux/actions';
 
 class TriviaGame extends React.Component {
   constructor(props) {
@@ -18,12 +21,13 @@ class TriviaGame extends React.Component {
     this.convert = this.convert.bind(this);
     this.resultCorrectScore = this.resultCorrectScore.bind(this);
     this.resultIncorrectScore = this.resultIncorrectScore.bind(this);
-    this.resetCount = this.resetCount.bind(this);
+    // this.resetCount = this.resetCount.bind(this);
+    // this.makeScore = this.makeScore.bind(this);
   }
 
   componentDidMount() {
     this.responseApi();
-    this.startingTime();
+    this.delayToStart();
   }
 
   componentDidUpdate() {
@@ -39,6 +43,15 @@ class TriviaGame extends React.Component {
 
   componentWillUnmount() {
     clearInterval(this.timerInterval);
+  }
+
+  delayToStart() {
+    const TIMEOUT = 5000;
+    this.setState({ isDisabled: true });
+    setTimeout(() => {
+      this.startingTime();
+      this.setState({ isDisabled: false });
+    }, TIMEOUT);
   }
 
   startingTime() {
@@ -64,7 +77,12 @@ class TriviaGame extends React.Component {
     const response = await fetch(URL_TRIVIA);
     const getJson = await response.json();
     const result = getJson.results;
-    this.setState({ trivia: result });
+    this.setState({
+      trivia: result,
+    });
+    const { trivia } = this.state;
+    const { getTrivia } = this.props;
+    getTrivia(trivia);
   }
 
   convert(str) {
@@ -76,21 +94,22 @@ class TriviaGame extends React.Component {
     if (target.id === 'correct-answer') {
       this.setState((preventState) => ({
         correctScore: preventState.correctScore + 1,
+        isDisabled: true,
       }));
     }
   }
 
   resultIncorrectScore({ target }) {
-    console.log(target.name);
     if (target.name === 'wrong-answer') {
       this.setState((preventState) => ({
         incorrectScore: preventState.incorrectScore + 1,
+        isDisabled: true,
       }));
     }
   }
 
   makeEstrutureTrivia(trivia, initialIndex) {
-    const { isDisabled } = this.state;
+    // const { isDisabled } = this.state;
     const mixedArray = [trivia[initialIndex].correct_answer,
       ...trivia[initialIndex].incorrect_answers];
     return (
@@ -100,13 +119,15 @@ class TriviaGame extends React.Component {
           titulo:
           {this.convert(trivia[initialIndex].question)}
         </h3>
+
         {mixedArray.map((mix, index) => (
           <Answer
             resultCorrectScore={ this.resultCorrectScore }
             resultIncorrectScore={ this.resultIncorrectScore }
             mix={ mix }
+            { ...this.state }
             index={ index }
-            isDisabled={ isDisabled }
+            makeScore={ this.makeScore }
             key={ `${mix}-${index}` }
           />
         ))}
@@ -117,7 +138,10 @@ class TriviaGame extends React.Component {
             this.setState((prevState) => ({
               countAwnser: prevState.countAwnser + 1,
               count: 30,
+              isDisabled: false,
             }));
+            this.componentWillUnmount();
+            this.delayToStart();
             this.componentDidUpdate();
           } }
         >
@@ -126,9 +150,17 @@ class TriviaGame extends React.Component {
       </div>
     );
   }
+  // getQuestionInformation() {
+  //   const { trivia, countAwnser } = this.state;
+  //   const { difficulty } = trivia[countAwnser];
+  //   return difficulty;
+  // }
 
   render() {
     const { trivia, countAwnser, correctScore, incorrectScore, count } = this.state;
+    const { player } = this.props;
+    const state = { player };
+    localStorage.setItem('state', JSON.stringify(state));
     return (
       <div>
         <h2>Trivia game</h2>
@@ -150,4 +182,18 @@ class TriviaGame extends React.Component {
   }
 }
 
-export default TriviaGame;
+TriviaGame.propTypes = {
+  getTrivia: PropTypes.func.isRequired,
+  player: PropTypes.objectOf(PropTypes.string).isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  arrayTrivia: state.trivia,
+  player: state.user.player,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  getTrivia: (trivia) => dispatch(triviaApi(trivia)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(TriviaGame);
