@@ -21,7 +21,7 @@ class Answer extends Component {
     const { getScore } = this.props;
     const count = JSON.parse(localStorage.getItem('count'));
     const difficultyIndex = trivia[countAwnser].difficulty;
-    console.log(difficultyIndex);
+    // console.log(difficultyIndex);
     const correctAnswer = trivia[countAwnser].correct_answer;
     // const { getscore, difficulty } = this.props;
     const TEN = 10;

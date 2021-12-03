@@ -15,6 +15,10 @@ class Login extends Component {
     this.pageSetings = this.pageSetings.bind(this);
   }
 
+  componentDidMount() {
+    console.log(this.props);
+  }
+
   handleChange({ target: { name, value } }) {
     this.setState({ [name]: value });
   }

@@ -24,6 +24,7 @@ class TriviaGame extends React.Component {
     this.resultIncorrectScore = this.resultIncorrectScore.bind(this);
     this.visibleButton = this.visibleButton.bind(this);
     this.unvisibleButton = this.unvisibleButton.bind(this);
+    this.sendFeedback = this.sendFeedback.bind(this);
     // this.resetCount = this.resetCount.bind(this);
     // this.makeScore = this.makeScore.bind(this);
   }
@@ -129,6 +130,17 @@ class TriviaGame extends React.Component {
     );
   }
 
+  sendFeedback() {
+    const { countAwnser } = this.state;
+    const { history } = this.props;
+    const FOUR = 3;
+    console.log(countAwnser);
+    if (countAwnser > FOUR) {
+      //   e.preventDefault();
+      history.push('/feedback');
+    }
+  }
+
   makeEstrutureTrivia(trivia, initialIndex) {
     // const { isDisabled } = this.state;
     const mixedArray = [trivia[initialIndex].correct_answer,
@@ -168,6 +180,7 @@ class TriviaGame extends React.Component {
               this.componentWillUnmount();
               this.delayToStart();
               this.componentDidUpdate();
+              this.sendFeedback();
             } }
           >
             Próxima pergunta
@@ -211,6 +224,9 @@ class TriviaGame extends React.Component {
 TriviaGame.propTypes = {
   getTrivia: PropTypes.func.isRequired,
   player: PropTypes.objectOf(PropTypes.string).isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
 };
 
 const mapStateToProps = (state) => ({
