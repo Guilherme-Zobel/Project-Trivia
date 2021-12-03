@@ -14,6 +14,7 @@ class TriviaGame extends React.Component {
       incorrectScore: 0,
       count: 30,
       isDisabled: false,
+      visibleButton: false,
     };
 
     this.responseApi = this.responseApi.bind(this);
@@ -21,6 +22,8 @@ class TriviaGame extends React.Component {
     this.convert = this.convert.bind(this);
     this.resultCorrectScore = this.resultCorrectScore.bind(this);
     this.resultIncorrectScore = this.resultIncorrectScore.bind(this);
+    this.visibleButton = this.visibleButton.bind(this);
+    this.unvisibleButton = this.unvisibleButton.bind(this);
     // this.resetCount = this.resetCount.bind(this);
     // this.makeScore = this.makeScore.bind(this);
   }
@@ -92,6 +95,7 @@ class TriviaGame extends React.Component {
 
   resultCorrectScore({ target }) {
     if (target.id === 'correct-answer') {
+      this.visibleButton();
       this.setState((preventState) => ({
         correctScore: preventState.correctScore + 1,
         isDisabled: true,
@@ -101,6 +105,7 @@ class TriviaGame extends React.Component {
 
   resultIncorrectScore({ target }) {
     if (target.name === 'wrong-answer') {
+      this.visibleButton();
       this.setState((preventState) => ({
         incorrectScore: preventState.incorrectScore + 1,
         isDisabled: true,
@@ -108,10 +113,27 @@ class TriviaGame extends React.Component {
     }
   }
 
+  visibleButton() {
+    this.setState(
+      {
+        visibleButton: true,
+      },
+    );
+  }
+
+  unvisibleButton() {
+    this.setState(
+      {
+        visibleButton: false,
+      },
+    );
+  }
+
   makeEstrutureTrivia(trivia, initialIndex) {
     // const { isDisabled } = this.state;
     const mixedArray = [trivia[initialIndex].correct_answer,
       ...trivia[initialIndex].incorrect_answers];
+    const { visibleButton } = this.state;
     return (
       <div id={ initialIndex }>
         <h3 data-testid="question-category">{trivia[initialIndex].category}</h3>
@@ -124,6 +146,7 @@ class TriviaGame extends React.Component {
           <Answer
             resultCorrectScore={ this.resultCorrectScore }
             resultIncorrectScore={ this.resultIncorrectScore }
+            unvisibleButton={ this.unvisibleButton }
             mix={ mix }
             { ...this.state }
             index={ index }
@@ -132,21 +155,24 @@ class TriviaGame extends React.Component {
           />
         ))}
         <hr />
-        <button
-          type="button"
-          onClick={ () => {
-            this.setState((prevState) => ({
-              countAwnser: prevState.countAwnser + 1,
-              count: 30,
-              isDisabled: false,
-            }));
-            this.componentWillUnmount();
-            this.delayToStart();
-            this.componentDidUpdate();
-          } }
-        >
-          Próxima pergunta
-        </button>
+        { visibleButton && (
+          <button
+            type="button"
+            data-testid="btn-next"
+            onClick={ () => {
+              this.setState((prevState) => ({
+                countAwnser: prevState.countAwnser + 1,
+                count: 30,
+                isDisabled: false,
+              }));
+              this.componentWillUnmount();
+              this.delayToStart();
+              this.componentDidUpdate();
+            } }
+          >
+            Próxima pergunta
+          </button>
+        )}
       </div>
     );
   }

@@ -11,6 +11,11 @@ class Answer extends Component {
     this.correctOrIncorrect = this.correctOrIncorrect.bind(this);
   }
 
+  componentDidMount() {
+    const { unvisibleButton } = this.props;
+    unvisibleButton();
+  }
+
   makeScore() {
     const { trivia, countAwnser } = this.props;
     const { getScore } = this.props;
@@ -102,4 +107,5 @@ Answer.propTypes = {
   resultCorrectScore: PropTypes.func.isRequired,
   resultIncorrectScore: PropTypes.func.isRequired,
   trivia: PropTypes.arrayOf(PropTypes.object).isRequired,
+  unvisibleButton: PropTypes.func.isRequired,
 };
