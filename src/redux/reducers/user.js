@@ -1,5 +1,5 @@
 import { USER_EMAIL, USER_TOKEN, USER_NAME,
-  TRIVIA_API, SCORE_USER } from '../actions';
+  TRIVIA_API, SCORE_USER, CORRECT_NUMBER } from '../actions';
 
 const INITIAL_STATE = {
   token: '',
@@ -45,10 +45,11 @@ export default function user(state = INITIAL_STATE, action) {
       ...state, player: { ...state.player, name: action.payload },
     };
 
-  // case USER_SCORE:
-  //   return {
-  //     ...state, player: { ...state.player, score: action.payload },
-  //   };
+  case CORRECT_NUMBER:
+    return {
+      ...state, player: { ...state.player, assertions: action.payload },
+    };
+
   case SCORE_USER: {
     const sumScore = state.player.score + action.payload;
     return { ...state,

@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 import Answer from './Answer';
-import { triviaApi } from '../redux/actions';
+import { triviaApi, sumCorrect } from '../redux/actions';
 
 class TriviaGame extends React.Component {
   constructor(props) {
@@ -25,8 +25,7 @@ class TriviaGame extends React.Component {
     this.visibleButton = this.visibleButton.bind(this);
     this.unvisibleButton = this.unvisibleButton.bind(this);
     this.sendFeedback = this.sendFeedback.bind(this);
-    // this.resetCount = this.resetCount.bind(this);
-    // this.makeScore = this.makeScore.bind(this);
+    this.countCorrect = this.countCorrect.bind(this);
   }
 
   componentDidMount() {
@@ -133,16 +132,13 @@ class TriviaGame extends React.Component {
   sendFeedback() {
     const { countAwnser } = this.state;
     const { history } = this.props;
-    const FOUR = 3;
-    console.log(countAwnser);
-    if (countAwnser > FOUR) {
-      //   e.preventDefault();
+    const THREE = 3;
+    if (countAwnser > THREE) {
       history.push('/feedback');
     }
   }
 
   makeEstrutureTrivia(trivia, initialIndex) {
-    // const { isDisabled } = this.state;
     const mixedArray = [trivia[initialIndex].correct_answer,
       ...trivia[initialIndex].incorrect_answers];
     const { visibleButton } = this.state;
@@ -164,6 +160,8 @@ class TriviaGame extends React.Component {
             index={ index }
             makeScore={ this.makeScore }
             key={ `${mix}-${index}` }
+            sendFeedback={ this.sendFeedback }
+            countCorrect={ this.countCorrect }
           />
         ))}
         <hr />
@@ -180,7 +178,8 @@ class TriviaGame extends React.Component {
               this.componentWillUnmount();
               this.delayToStart();
               this.componentDidUpdate();
-              this.sendFeedback();
+              // this.sendFeedback();
+              // this.countCorrect();
             } }
           >
             Próxima pergunta
@@ -189,11 +188,12 @@ class TriviaGame extends React.Component {
       </div>
     );
   }
-  // getQuestionInformation() {
-  //   const { trivia, countAwnser } = this.state;
-  //   const { difficulty } = trivia[countAwnser];
-  //   return difficulty;
-  // }
+
+  countCorrect() {
+    const { correctScore } = this.state;
+    const { sendScore } = this.props;
+    sendScore(correctScore);
+  }
 
   render() {
     const { trivia, countAwnser, correctScore, incorrectScore, count } = this.state;
@@ -227,6 +227,7 @@ TriviaGame.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func,
   }).isRequired,
+  sendScore: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -236,6 +237,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   getTrivia: (trivia) => dispatch(triviaApi(trivia)),
+  sendScore: (correctNumber) => dispatch(sumCorrect(correctNumber)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TriviaGame);

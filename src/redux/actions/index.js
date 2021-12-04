@@ -6,6 +6,7 @@ export const TRIVIA_API = 'TRIVIA_API';
 export const SCORE_USER = 'SCORE_USER';
 export const SCORE_TOTAL = 'SCORE_TOTAL';
 export const ASSERTION_USER = 'ASSERTION_USER';
+export const CORRECT_NUMBER = 'CORRECT_NUMBER';
 
 export function userEmail(payload) {
   return {
@@ -59,6 +60,13 @@ export function scoreTotal(payload) {
 export function assertionsUser(payload) {
   return {
     type: ASSERTION_USER,
+    payload,
+  };
+}
+
+export function sumCorrect(payload) {
+  return {
+    type: CORRECT_NUMBER,
     payload,
   };
 }

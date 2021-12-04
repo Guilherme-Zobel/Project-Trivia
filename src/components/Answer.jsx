@@ -57,7 +57,7 @@ class Answer extends Component {
   }
 
   render() {
-    const { mix, index, isDisabled } = this.props;
+    const { mix, index, isDisabled, countCorrect } = this.props;
     return (
       index === 0 ? (
         <button
@@ -68,6 +68,7 @@ class Answer extends Component {
           onClick={ (e) => {
             this.correctOrIncorrect(e);
             this.makeScore();
+            countCorrect();
           } }
         // className={colorAnswer && ('greenAnswer')}
         >
@@ -108,4 +109,5 @@ Answer.propTypes = {
   resultIncorrectScore: PropTypes.func.isRequired,
   trivia: PropTypes.arrayOf(PropTypes.object).isRequired,
   unvisibleButton: PropTypes.func.isRequired,
+  countCorrect: PropTypes.func.isRequired,
 };
