@@ -47,7 +47,7 @@ export default function user(state = INITIAL_STATE, action) {
 
   case CORRECT_NUMBER:
     return {
-      ...state, player: { ...state.player, assertions: action.payload },
+      ...state, player: { ...state.player, assertions: action.payload + 1 },
     };
 
   case SCORE_USER: {
