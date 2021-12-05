@@ -13,16 +13,6 @@ const INITIAL_STATE = {
 
 };
 
-// function sumTotalScore(score) {
-//   const result = score.reduce((acumulador, valorCorrente) => {
-//     acumulador += valorCorrente;
-//     return acumulador;
-//   }, 0);
-//   localStorage.setItem('score:', JSON.stringify(result));
-//   // scoreTotal(result);
-//   return result;
-// }
-
 export default function user(state = INITIAL_STATE, action) {
   switch (action.type) {
   case TRIVIA_API:
