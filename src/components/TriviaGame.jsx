@@ -49,7 +49,7 @@ class TriviaGame extends React.Component {
   }
 
   delayToStart() {
-    const TIMEOUT = 5000;
+    const TIMEOUT = 1000;
     this.setState({ isDisabled: true });
     setTimeout(() => {
       this.startingTime();
