@@ -44,6 +44,7 @@ class Answer extends Component {
 
   correctOrIncorrect(e) {
     const { resultCorrectScore, resultIncorrectScore, count } = this.props;
+
     document.getElementById('correct-answer').classList.add('greenAnswer');
     Array.from(document.getElementsByName('wrong-answer'))
       .map((answer) => answer.classList.add('redAnswer'));

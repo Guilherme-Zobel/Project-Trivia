@@ -1,22 +1,58 @@
 .next-button {
-  width: 15%;
+  width: 7rem;
   padding: 1rem;
+  margin-left: 42rem;
+  margin-top: 3rem;
 }
 
 .div-btn-next {
-  text-align: end;
-  margin-right: 10rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .div-question {
   text-align: center;
+  margin-top: 5rem;
 }
 
-.div-score-time h3{
-  padding: 1rem
+.div-questions-category-text {
+  padding: 3rem;
 }
 
-.div-score-time h3{
-  padding: 1rem;
-  margin-left: 1rem;
+.time-info {
+  padding: 5rem;
+}
+
+@media(max-width: 1280px) {
+  button {
+    width: 45rem;
+  }
+  .next-button {
+    margin-left: 37rem;
+  }
+}
+
+@media(max-width: 800px) {
+  .div-questions-category-text {
+    margin-top: -6rem;
+  }
+  .next-button {
+    margin-left: 32rem;
+    width: 13rem;
+  }
+}
+
+@media(max-width: 500px) {
+  button {
+    width: 28rem;
+  }
+  .next-button {
+    margin-left: 15rem;
+    width: 13rem;
+  }
+
+  .div-questions-category-text {
+    margin-top: -8rem;
+  }
 }

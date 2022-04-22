@@ -1,0 +1,84 @@
+#page-feebaback h2, h3, h4 {
+  text-align: center;
+  font-size: 2rem;
+}
+
+.btn-feedback{
+  display: flex;
+  text-align: center;
+  justify-content: center;
+}
+
+.div-avatar {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  padding: 3rem;
+}
+
+.btn-feedback button {
+  background: transparent;
+  border: solid 1px #CCC;
+  color: #CCC;
+  width: 37rem;
+  margin-top: 5rem;
+  display: block;
+  text-align: center;
+}
+
+.btn-feedback button:hover {
+  color: #eba417;
+  border-color: #eba417;
+}
+
+@media(max-width: 1200px) {
+  .img-fluid {
+    height: 13rem;
+  }
+  button {
+    width: 45rem;
+  }
+  .header h1 {
+    padding: 2rem;
+    border-bottom: 1px solid #CCC;
+    border-right: 1px solid #CCC;
+    width: 18rem;
+  }
+}
+
+@media(max-width: 800px) {
+  .img-fluid {
+    height: 12rem;
+    margin-top: -5rem;
+    margin-bottom: 5rem;
+  }
+  .div-avatar img{
+    width: 4rem;
+    margin-top: -0.5rem;
+  }
+  .header h1 {
+    padding: 0rem;
+    border-bottom: none;
+    border-right: none;
+    width: 18rem;
+  }
+
+}
+
+@media(max-width: 500px) {
+  .img-fluid {
+    height: 10rem;
+    margin-top: -1rem;
+  }
+    .header h1 {
+    padding: 0rem;
+    width: 10rem;
+  }
+  .btn-feedback button {
+    width: 30rem;
+  }
+}
+
+
+
+

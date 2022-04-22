@@ -37,13 +37,12 @@ class Header extends React.Component {
               {score}
             </span>
           </h1>
-          <img src={ imageApi } alt="imagem" />
+          <img src={ imageApi } alt="imagem" className="img-gravatar" />
         </div>
         <div className="img-header">
           <img className="img-fluid" src={ trivia } alt="imagem" />
         </div>
         <p>{name}</p>
-        {/* </div> */}
       </header>
     );
   }

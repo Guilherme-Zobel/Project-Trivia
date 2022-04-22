@@ -3,6 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { BiAlarm } from 'react-icons/bi';
 import { BsXCircleFill, BsCheckCircleFill } from 'react-icons/bs';
+import { GrLinkNext } from 'react-icons/gr';
 import Answer from './Answer';
 import { triviaApi, sumCorrect } from '../redux/actions';
 import '../styles/triviaGame.css';
@@ -151,12 +152,14 @@ class TriviaGame extends React.Component {
       ...trivia[initialIndex].incorrect_answers];
     const { visibleButton } = this.state;
     return (
-      <div id={ initialIndex }>
-        <h3 data-testid="question-category">{trivia[initialIndex].category}</h3>
-        <h3 data-testid="question-text">
-          titulo:
-          {this.convert(trivia[initialIndex].question)}
-        </h3>
+      <div className="div-questions-category-text">
+        <div id={ initialIndex }>
+          <h3>{trivia[initialIndex].category}</h3>
+          <h3>
+            titulo:
+            {this.convert(trivia[initialIndex].question)}
+          </h3>
+        </div>
 
         {mixedArray.map((mix, index) => (
           <Answer
@@ -172,12 +175,10 @@ class TriviaGame extends React.Component {
             countCorrect={ this.countCorrect }
           />
         ))}
-        <hr />
         { visibleButton && (
           <div className="div-btn-next">
             <button
               type="button"
-              data-testid="btn-next"
               className="next-button"
               onClick={ () => {
                 this.setState((prevState) => ({
@@ -191,7 +192,7 @@ class TriviaGame extends React.Component {
                 this.sendFeedback();
               } }
             >
-              Próxima pergunta
+              <GrLinkNext />
             </button>
           </div>
         )}
@@ -216,19 +217,22 @@ class TriviaGame extends React.Component {
           {trivia.length === 0 ? (<h2>carregando...</h2>)
             : this.makeEstrutureTrivia(trivia, countAwnser)}
         </div>
-        <h3>
-          <BiAlarm size={ 30 } />
-          {` = ${count}`}
-        </h3>
-        <h3>
-          <BsCheckCircleFill size={ 25 } />
-          {` = ${correctScore}`}
-        </h3>
-        <h3>
-          <BsXCircleFill size={ 25 } />
-          {` = 
+        <div className="time-info">
+          <h3>
+            <BiAlarm size={ 30 } />
+            {` = ${count}`}
+          </h3>
+
+          <h3>
+            <BsCheckCircleFill size={ 25 } />
+            {` = ${correctScore}`}
+          </h3>
+          <h3>
+            <BsXCircleFill size={ 25 } />
+            {` = 
           ${incorrectScore}`}
-        </h3>
+          </h3>
+        </div>
       </div>
     );
   }

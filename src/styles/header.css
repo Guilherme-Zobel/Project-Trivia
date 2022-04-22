@@ -13,6 +13,7 @@
 .img-fluid {
   height: 15rem;
   text-align: center;
+  margin-top: -11rem;
 }
 
 .header span {
@@ -24,5 +25,60 @@
   padding: 2rem;
   border-bottom: 1px solid #CCC;
   border-right: 1px solid #CCC;
-  width: 13%;
+  width: 16rem;
+}
+
+
+@media(max-width: 1200px) {
+  .img-fluid {
+    height: 13rem;
+  }
+  button {
+    width: 45rem;
+  }
+  .header h1 {
+    padding: 2rem;
+    border-bottom: 1px solid #CCC;
+    border-right: 1px solid #CCC;
+    width: 18rem;
+  }
+}
+
+@media(max-width: 800px) {
+  .img-fluid {
+    height: 12rem;
+    margin-top: -3rem;
+  }
+  .img-gravatar{
+    width: 5rem;
+      margin-top: -0.5rem;
+  }
+  .header h1 {
+    padding: 0rem;
+    border-bottom: none;
+    border-right: none;
+    width: 18rem;
+  }
+
+}
+
+@media(max-width: 500px) {
+  .img-fluid {
+    height: 10rem;
+    margin-top: -1rem;
+  }
+  .info-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 3rem;
+  }
+  .img-gravatar{
+    width: 4rem;
+    margin-top: 0rem;
+  }
+    .header h1 {
+    padding: 0rem;
+    width: 10rem;
+  }
 }
