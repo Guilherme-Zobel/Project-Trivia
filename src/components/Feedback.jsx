@@ -9,6 +9,12 @@ export default class Feedback extends Component {
 
   playAgain() {
     const { history } = this.props;
+    history.push('/game-page');
+    document.location.reload(true);
+  }
+
+  endGame() {
+    const { history } = this.props;
     localStorage.clear();
     history.push('/');
   }
@@ -43,7 +49,13 @@ export default class Feedback extends Component {
           Jogar novamente
 
         </button>
-        <button data-testid="btn-ranking" type="button">Ver Ranking</button>
+        <button
+          data-testid="btn-ranking"
+          type="button"
+          onClick={ this.endGame }
+        >
+          Encerrar
+        </button>
       </div>
     );
   }

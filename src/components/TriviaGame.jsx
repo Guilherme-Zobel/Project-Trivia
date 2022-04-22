@@ -1,8 +1,11 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
+import { BiAlarm } from 'react-icons/bi';
+import { BsXCircleFill, BsCheckCircleFill } from 'react-icons/bs';
 import Answer from './Answer';
 import { triviaApi, sumCorrect } from '../redux/actions';
+import '../styles/triviaGame.css';
 
 class TriviaGame extends React.Component {
   constructor(props) {
@@ -72,6 +75,11 @@ class TriviaGame extends React.Component {
     this.setState((prevState) => ({
       incorrectScore: prevState.incorrectScore + 1,
     }));
+    this.setState(
+      {
+        visibleButton: true,
+      },
+    );
   }
 
   async responseApi() {
@@ -166,23 +174,26 @@ class TriviaGame extends React.Component {
         ))}
         <hr />
         { visibleButton && (
-          <button
-            type="button"
-            data-testid="btn-next"
-            onClick={ () => {
-              this.setState((prevState) => ({
-                countAwnser: prevState.countAwnser + 1,
-                count: 30,
-                isDisabled: false,
-              }));
-              this.componentWillUnmount();
-              this.delayToStart();
-              this.componentDidUpdate();
-              this.sendFeedback();
-            } }
-          >
-            Próxima pergunta
-          </button>
+          <div className="div-btn-next">
+            <button
+              type="button"
+              data-testid="btn-next"
+              className="next-button"
+              onClick={ () => {
+                this.setState((prevState) => ({
+                  countAwnser: prevState.countAwnser + 1,
+                  count: 30,
+                  isDisabled: false,
+                }));
+                this.componentWillUnmount();
+                this.delayToStart();
+                this.componentDidUpdate();
+                this.sendFeedback();
+              } }
+            >
+              Próxima pergunta
+            </button>
+          </div>
         )}
       </div>
     );
@@ -200,19 +211,22 @@ class TriviaGame extends React.Component {
     const state = { player };
     localStorage.setItem('state', JSON.stringify(state));
     return (
-      <div>
-        <h2>Trivia game</h2>
-        {trivia.length === 0 ? (<p>carregando...</p>)
-          : this.makeEstrutureTrivia(trivia, countAwnser)}
+      <div className="div-score-time">
+        <div className="div-question">
+          {trivia.length === 0 ? (<h2>carregando...</h2>)
+            : this.makeEstrutureTrivia(trivia, countAwnser)}
+        </div>
         <h3>
-          {`Timer = ${count}`}
+          <BiAlarm size={ 30 } />
+          {` = ${count}`}
         </h3>
         <h3>
-          {`Correct Score =  
-          ${correctScore}`}
+          <BsCheckCircleFill size={ 25 } />
+          {` = ${correctScore}`}
         </h3>
         <h3>
-          {`Incorrect Score = 
+          <BsXCircleFill size={ 25 } />
+          {` = 
           ${incorrectScore}`}
         </h3>
       </div>

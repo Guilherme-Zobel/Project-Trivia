@@ -56,35 +56,36 @@ class Answer extends Component {
     const { mix, index, isDisabled, countCorrect } = this.props;
     return (
       index === 0 ? (
-        <button
-          data-testid="correct-answer"
-          type="button"
-          className="btn btn-primary"
-          id="correct-answer"
-          disabled={ isDisabled }
-          onClick={ (e) => {
-            this.correctOrIncorrect(e);
-            this.makeScore();
-            countCorrect();
-          } }
-
-        >
-          {mix}
-        </button>)
+        <div className="div-questions">
+          <button
+            data-testid="correct-answer"
+            type="button"
+            id="correct-answer"
+            disabled={ isDisabled }
+            onClick={ (e) => {
+              this.correctOrIncorrect(e);
+              this.makeScore();
+              countCorrect();
+            } }
+          >
+            {mix}
+          </button>
+        </div>
+      )
         : (
-          <div>
+          <div className="div-questions">
             <button
               data-testid={ `wrong-answer-${index}` }
               type="button"
               name="wrong-answer"
               disabled={ isDisabled }
               onClick={ this.correctOrIncorrect }
-              className="btn btn-primary wrong-answer"
+              className="wrong-answer"
             >
               {mix}
             </button>
-          </div>)
-
+          </div>
+        )
     );
   }
 }

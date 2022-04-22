@@ -1,0 +1,22 @@
+.next-button {
+  width: 15%;
+  padding: 1rem;
+}
+
+.div-btn-next {
+  text-align: end;
+  margin-right: 10rem;
+}
+
+.div-question {
+  text-align: center;
+}
+
+.div-score-time h3{
+  padding: 1rem
+}
+
+.div-score-time h3{
+  padding: 1rem;
+  margin-left: 1rem;
+}

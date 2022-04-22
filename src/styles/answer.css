@@ -1,12 +1,34 @@
-.redAnswer {
+/* .btn .btn-primary {
+  border: none;
+} */
+
+.redAnswer:disabled {
   border-width: 3px;
-  border-color: rgb(255, 0, 0);
-  border-style: solid;
+  background: #8C1F28;
+  color: #CCC;
 } 
 
-.greenAnswer {
+.greenAnswer:disabled {
   border-width: 3px;
-  border-color: rgb(6, 240, 15);
-  border-style: solid;
+  background: #044040;
+  color: #CCC;
   
+}
+
+button {
+  border: none;
+  width: 50%;
+  padding: 2rem;
+  margin-top: 1rem;
+  font-size: 1.7rem;
+  border-radius: 1rem;
+}
+
+button:disabled {
+  background-color: #CCC;
+}
+
+.div-questions {
+  text-align: center;
+
 }
