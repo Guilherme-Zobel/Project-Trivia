@@ -33,10 +33,8 @@ export default class Feedback extends Component {
           { resultTest() }
 
         </h4>
-        {/* Requisito 14 nas próximas linhas */}
         <h4 data-testid="feedback-total-score">{ state.player.score }</h4>
         <h4 data-testid="feedback-total-question">{ state.player.assertions }</h4>
-        {/* Requisito 15 iniciado na próxima linha */}
         <button
           data-testid="btn-play-again"
           type="button"
@@ -45,7 +43,6 @@ export default class Feedback extends Component {
           Jogar novamente
 
         </button>
-        {/* Requisito 16 iniciado na próxima linha */}
         <button data-testid="btn-ranking" type="button">Ver Ranking</button>
       </div>
     );

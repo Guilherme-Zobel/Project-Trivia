@@ -179,7 +179,6 @@ class TriviaGame extends React.Component {
               this.delayToStart();
               this.componentDidUpdate();
               this.sendFeedback();
-              // this.countCorrect();
             } }
           >
             Próxima pergunta

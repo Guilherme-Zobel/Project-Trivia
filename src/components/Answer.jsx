@@ -1,9 +1,8 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import '../styles/Answer.css';
 import { scoreUser } from '../redux/actions';
-// import { userScore } from '../redux/actions';
+import '../styles/answer.css';
 
 class Answer extends Component {
   constructor() {
@@ -21,15 +20,13 @@ class Answer extends Component {
     const { getScore } = this.props;
     const count = JSON.parse(localStorage.getItem('count'));
     const difficultyIndex = trivia[countAwnser].difficulty;
-    // console.log(difficultyIndex);
     const correctAnswer = trivia[countAwnser].correct_answer;
-    // const { getscore, difficulty } = this.props;
     const TEN = 10;
     const EASY = 1;
     const MEDIUM = 2;
     const HARD = 3;
     const INCORRECT_ANSWER = 0;
-    // const CORRECT_ANSWER = 'correct_answer';
+
     if (correctAnswer !== 'wrong-answer') {
       switch (difficultyIndex) {
       case 'easy':
@@ -53,7 +50,6 @@ class Answer extends Component {
     resultCorrectScore(e);
     resultIncorrectScore(e);
     localStorage.setItem('count', JSON.stringify(count));
-    // sendscore(count);
   }
 
   render() {
@@ -63,6 +59,7 @@ class Answer extends Component {
         <button
           data-testid="correct-answer"
           type="button"
+          className="btn btn-primary"
           id="correct-answer"
           disabled={ isDisabled }
           onClick={ (e) => {
@@ -70,7 +67,7 @@ class Answer extends Component {
             this.makeScore();
             countCorrect();
           } }
-        // className={colorAnswer && ('greenAnswer')}
+
         >
           {mix}
         </button>)
@@ -82,7 +79,7 @@ class Answer extends Component {
               name="wrong-answer"
               disabled={ isDisabled }
               onClick={ this.correctOrIncorrect }
-              className="wrong-answer"
+              className="btn btn-primary wrong-answer"
             >
               {mix}
             </button>
@@ -99,7 +96,7 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(null, mapDispatchToProps)(Answer);
 
 Answer.propTypes = {
-  count: PropTypes.number.isRequired, // sendscore: PropTypes.func.isRequired,
+  count: PropTypes.number.isRequired,
   countAwnser: PropTypes.number.isRequired,
   getScore: PropTypes.func.isRequired,
   index: PropTypes.number.isRequired,

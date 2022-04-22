@@ -1,7 +1,9 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import '../styles/login.css';
 import { userEmail, fetchTokenAPI, userName } from '../redux/actions';
+import trivia from '../trivia.png';
 
 class Login extends Component {
   constructor() {
@@ -50,43 +52,53 @@ class Login extends Component {
       handleChange,
       handleClick,
       validateStartButton,
-      pageSetings,
     } = this;
 
     return (
-      <form>
-        <input
-          type="email"
-          name="email"
-          value={ email }
-          placeholder="Digite o email"
-          data-testid="input-gravatar-email"
-          onChange={ handleChange }
-        />
-        <input
-          type="text"
-          name="name"
-          value={ name }
-          placeholder="Digite o nome"
-          data-testid="input-player-name"
-          onChange={ handleChange }
-        />
-        <button
-          disabled={ validateStartButton(email, name) }
-          type="submit"
-          data-testid="btn-play"
-          onClick={ handleClick }
-        >
-          Jogar
-        </button>
-        <button
-          type="button"
-          onClick={ pageSetings }
-          data-testid="btn-settings"
-        >
-          Settings
-        </button>
-      </form>
+      <div className="container col-12 col-md-9" id="form-container">
+        <div className="row align-items-center gx-5">
+          <div className="col-md-6 order-2">
+            <h2>Faça o login para jogar</h2>
+            <form>
+              <div className="form-floating mb-3">
+                <input
+                  className="form-control"
+                  type="email"
+                  name="email"
+                  value={ email }
+                  placeholder="Digite o email"
+                  onChange={ handleChange }
+                />
+                <label htmlFor="email" className="form-label">Digite seu email</label>
+              </div>
+              <div className="form-floating mb-3">
+                <input
+                  className="form-control"
+                  type="text"
+                  name="name"
+                  value={ name }
+                  placeholder="Digite o nome"
+                  onChange={ handleChange }
+                />
+                <label htmlFor="name" className="form-label">Digite seu nome</label>
+              </div>
+              <button
+                className="btn btn-primary"
+                disabled={ validateStartButton(email, name) }
+                type="submit"
+                onClick={ handleClick }
+              >
+                Jogar
+              </button>
+            </form>
+          </div>
+          <div className="col-md-6 order-1">
+            <div className="col-12 trivia-img">
+              <img className="img-fluid" src={ trivia } alt="" />
+            </div>
+          </div>
+        </div>
+      </div>
     );
   }
 }

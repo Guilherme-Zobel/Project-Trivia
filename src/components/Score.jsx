@@ -3,8 +3,6 @@ import { connect } from 'react-redux';
 
 class Score extends Component {
   render() {
-    // const { formUser } = this.props;
-    // console.log(formUser);
     const count = JSON.parse(localStorage.getItem('count')) || [];
     return (
       <div>

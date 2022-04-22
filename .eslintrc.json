@@ -48,12 +48,12 @@
       }
     ],
     "max-params": ["error", 4],
-    "max-lines": ["error", 250],
+    // "max-lines": ["error", 250],
     "max-statements": ["error", 15, { "ignoreTopLevelFunctions": true }],
     "complexity": ["error", 8],
     "max-nested-callbacks": ["error", 2],
     "max-depth": ["error", 3],
-    "max-lines-per-function": ["error", 50],
+    // "max-lines-per-function": ["error", 50],
     "object-curly-newline": ["off"],
     "import/no-extraneous-dependencies": ["off"],
     "sonarjs/cognitive-complexity": ["error", 15],
@@ -85,6 +85,7 @@
     "react/no-did-mount-set-state": ["error"],
     "react/no-did-update-set-state": ["error"],
     "react/jsx-props-no-spreading": ["off"],
+    "jsx-a11y/label-has-associated-control": ["off"],
     "react/no-multi-comp": ["error", {"ignoreStateless": false}],
     "react/prefer-stateless-function": ["off"],
     "react/no-access-state-in-setstate": ["error"],
@@ -102,7 +103,7 @@
     "react/jsx-closing-tag-location": ["error"],
     "react/jsx-curly-newline": ["error"],
     "react/jsx-fragments": ["error"],
-    "react/jsx-max-depth": ["error", {"max": 4}],
+    // "react/jsx-max-depth": ["error", {"max": 4}],
     "react/jsx-no-useless-fragment": ["error"],
     "react/jsx-curly-spacing": ["error", {"when": "always"}],
     "react/jsx-equals-spacing": ["error", "never"],
@@ -137,6 +138,7 @@
         "condition": "ignore",
         "logical": "ignore",
         "prop": "ignore"
+        
       }
     ]
   }

@@ -1,0 +1,94 @@
+#form-container {
+  background-color: #8C1F28;
+  border-radius: 1rem;
+  padding: 12rem;
+  margin-top: 8rem;
+  box-shadow: 0.5px 1px 1.5px rgba(255, 255, 255, 0.2);
+}
+
+.form-label {
+  font-size: 1.5rem;
+  color: #CCC;
+}
+
+.btn.btn-primary {
+  width: 100%;
+  background-color:  #044040;
+  border: none;
+  padding: 1rem;
+  font-size: 1.5rem;
+  margin-top: 2.5rem;
+}
+
+
+
+
+#form-container h2 {
+  font-weight: 700;
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+#form-container .form-control {
+  border: none;
+  font-size: 1.75rem;
+  border-bottom: 1px solid #CCC;
+  padding: 5rem 0 1rem 1rem;
+  background-color:  #8C1F28;
+}
+
+.form-control:focus {
+  box-shadow: none;
+}
+
+.trivia-img{
+  text-align: center;
+}
+
+.img-fluid {
+    height: 17rem;
+  }
+
+
+#link-container {
+  text-align: center;
+  padding-top: 50px;
+}
+
+
+  @media(max-width: 1720px) {
+    #form-container {
+      width: 90%;
+    }
+    .img-fluid {
+      height: 15rem;
+    }
+
+    @media(max-width: 1280px) {
+      #form-container {
+        margin-top: 4rem;
+        /* width: 90%; */
+      }
+      .img-fluid {
+        height: 13rem;
+      }
+    }
+
+    @media(max-width: 800px) {
+      #form-container {
+        margin-top: 4rem;
+        width: 80%;
+        padding: 5rem 5rem 13rem;
+      }
+      .img-fluid {
+        height: 100%;
+      }
+    }
+
+    @media(max-width: 500px) {
+      .img-fluid {
+        height: 10rem;
+      }
+    }
+
+}
