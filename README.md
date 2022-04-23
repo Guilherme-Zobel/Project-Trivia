@@ -25,3 +25,7 @@
 <a href="https://github.com/RuanCunha" >Thiago de Oliveira</a>
 <br>
 <a href="https://github.com/ThDevTrader" >Ruan Cunha</a>
+
+### Observações
+
+É possível encontrar algumas falhas no projeto que ainda estão sendo sanadas, mas gostaria de mesmo assim compartilhar toda experiência que obtive com esse projeto. Foi um grande o aprendizado para mim como pessoa, aprendi muito sobre a ferramenta Redux com meus colegas de grupo e mentores, além de claro de todas soft skills envolvida nesse ambiente, e por isso eu não poderia deixar de compartilhar esse projeto que foi tão marcante para mim. Obrigado a todos envolvidos nesse projeto, sei que não foi fácil, mas foi gratificante!
